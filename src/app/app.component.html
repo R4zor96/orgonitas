@@ -10,7 +10,6 @@
     <nav class="navbar navbar-expand-lg custom-navbar sticky-top shadow-sm">
       <div class="container">
         <a class="navbar-brand" href="#">
-          <!-- <img src="logo-orgonita.png" alt="Orgonitas Sagradas" height="36" class="me-2"> -->
           Orgonitas Sagradas
         </a>
         <button
@@ -38,19 +37,17 @@
 
             <!-- Ícono del carrito -->
             <li class="nav-item">
-              <a
+              <!-- <a
                 class="nav-link position-relative"
                 href="#"
-                data-bs-toggle="modal"
-                data-bs-target="#carritoModal"
+                (click)="openCartModal(cartModal)"
               >
                 🛒
                 <span
                   class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                  id="contador-carrito"
-                  >0</span
+                  >{{ contadorCarrito }}</span
                 >
-              </a>
+              </a> -->
             </li>
           </ul>
         </div>
@@ -101,29 +98,32 @@
           <div class="col-md-4 mb-2">
             <input
               type="text"
-              id="filtroNombre"
               class="form-control"
               placeholder="Buscar por nombre..."
+              [(ngModel)]="filterNombre"
+              (input)="applyFilters()"
             />
           </div>
           <div class="col-md-4 mb-2">
             <input
               type="number"
-              id="filtroPrecioMin"
               class="form-control"
               placeholder="Precio mínimo"
+              [(ngModel)]="filterPrecioMin"
+              (input)="applyFilters()"
             />
           </div>
           <div class="col-md-4 mb-2">
             <input
               type="number"
-              id="filtroPrecioMax"
               class="form-control"
               placeholder="Precio máximo"
+              [(ngModel)]="filterPrecioMax"
+              (input)="applyFilters()"
             />
           </div>
           <div class="col-md-6 mb-2">
-            <select id="ordenarPor" class="form-select">
+            <select class="form-select" [(ngModel)]="ordenarPor" (change)="applyFilters()">
               <option value="">Ordenar por...</option>
               <option value="precio-asc">Precio (menor a mayor)</option>
               <option value="precio-desc">Precio (mayor a menor)</option>
@@ -132,170 +132,106 @@
             </select>
           </div>
           <div class="col-md-6 mb-2 text-md-end">
-            <button id="limpiarFiltros" class="btn btn-secondary w-100">
+            <button class="btn btn-secondary w-100" (click)="limpiarFiltros()">
               Limpiar filtros
             </button>
           </div>
         </div>
 
         <!-- Productos -->
-        <div class="row g-4" id="contenedor-productos">
-          <div
-            class="col-md-4 producto"
-            data-nombre="Orgonita de Equilibrio"
-            data-precio="250"
-            data-descripcion="Ayuda a equilibrar la energía interna y armonizar los espacios. Ideal para meditación."
-          >
-            <div class="product-card p-3 text-center">
-              <img
-                src="./recursos/Orgonita de Equilibrio.png"
-                class="img-fluid mb-3"
-                alt="Orgonita de Equilibrio"
-              />
-              <h5>Orgonita de Equilibrio</h5>
-              <p>$250 MXN</p>
-              <button class="btn btn-custom btn-comprar">Comprar</button>
-            </div>
+        <div class="row g-4">
+          <!-- Mensaje si no hay productos -->
+          <div *ngIf="filteredProducts.length === 0" class="text-center mt-4">
+            <p>No se encontraron productos.</p>
           </div>
-          <div
-            class="col-md-4 producto"
-            data-nombre="Orgonita de Protección"
-            data-precio="300"
-            data-descripcion="Bloquea energías negativas del entorno. Ideal para hogares o lugares con mucho estrés."
-          >
-            <div class="product-card p-3 text-center">
-              <img
-                src="./recursos/Orgonita de Protección.png"
-                class="img-fluid mb-3"
-                alt="Orgonita de Protección"
-              />
-              <h5>Orgonita de Protección</h5>
-              <p>$300 MXN</p>
-              <button class="btn btn-custom btn-comprar">Comprar</button>
-            </div>
-          </div>
-          <div
-            class="col-md-4 producto"
-            data-nombre="Orgonita Floral"
-            data-precio="280"
-            data-descripcion="Diseño inspirado en flores, otorga frescura energética al ambiente."
-          >
-            <div class="product-card p-3 text-center">
-              <img
-                src="./recursos/Orgonita Floral.png"
-                class="img-fluid mb-3"
-                alt="Orgonita Floral"
-              />
-              <h5>Orgonita Floral</h5>
-              <p>$280 MXN</p>
-              <button class="btn btn-custom btn-comprar">Comprar</button>
-            </div>
-          </div>
-        </div>
 
-        <!-- Mensaje si no hay productos -->
-        <p
-          id="mensaje-sin-resultados"
-          class="text-center mt-4"
-          style="display: none"
-        >
-          No se encontraron productos.
-        </p>
-      </div>
-    </section>
-
-    <!-- Modal de producto -->
-    <div
-      class="modal fade"
-      id="modalProducto"
-      tabindex="-1"
-      aria-labelledby="modalProductoLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content bg-dark text-white">
-          <div class="modal-header border-secondary">
-            <h5 class="modal-title" id="modalProductoLabel">
-              Título del Producto
-            </h5>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="modal"
-              aria-label="Cerrar"
-            ></button>
-          </div>
-          <div
-            class="modal-body d-flex flex-column flex-md-row align-items-center gap-4"
-          >
-            <img
-              id="modal-img"
-              src=""
-              alt="Imagen Producto"
-              class="img-fluid rounded shadow"
-              style="max-width: 300px"
-            />
-            <div>
-              <h4 id="modal-nombre">Nombre</h4>
-              <p id="modal-precio" class="fw-bold text-success">$0.00 MXN</p>
-              <p id="modal-descripcion" class="text-light">
-                Aquí puedes poner una breve descripción del producto.
-              </p>
-              <div class="mb-2">
-                <label for="modal-cantidad" class="form-label">Cantidad:</label>
-                <input
-                  type="number"
-                  id="modal-cantidad"
-                  class="form-control border-gold bg-dark text-white rounded-3 shadow-sm"
-                  value="1"
-                  min="1"
-                  style="width: 100px"
-                />
-              </div>
-              <button id="btn-agregar-carrito" class="btn btn-custom mt-2">
-                Agregar al carrito
+          <!-- Lista de productos -->
+          <div *ngFor="let product of filteredProducts" class="col-md-4">
+            <div class="product-card p-3 text-center">
+              <img
+                [src]="product.imagen"
+                class="img-fluid mb-3"
+                [alt]="product.nombre"
+              />
+              <h5>{{ product.nombre }}</h5>
+              <p>{{ product.precio | currency:'MXN' }}</p>
+              <button class="btn btn-custom" (click)="openProductModal(productModal, product)">
+                Comprar
               </button>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Modal del carrito -->
-    <div
-      class="modal fade"
-      id="carritoModal"
-      tabindex="-1"
-      aria-labelledby="carritoModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content bg-dark text-white">
-          <div class="modal-header border-secondary">
-            <h5 class="modal-title" id="carritoModalLabel">Tu carrito</h5>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="modal"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <ul class="list-group mb-3" id="lista-carrito">
-              <!-- Productos se insertan aquí -->
-            </ul>
-            <div class="text-end fw-bold">
-              Total: $<span id="total-carrito">0.00</span> MXN
+    <!-- Modal de producto (usando ng-bootstrap) -->
+    <ng-template #productModal let-modal>
+      <div class="modal-content bg-dark text-white">
+        <div class="modal-header border-secondary">
+          <h5 class="modal-title">{{ selectedProduct?.nombre }}</h5>
+          <button type="button" class="btn-close btn-close-white" (click)="modal.dismiss()" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body d-flex flex-column flex-md-row align-items-center gap-4">
+          <img
+            [src]="selectedProduct?.imagen"
+            alt="Imagen Producto"
+            class="img-fluid rounded shadow"
+            style="max-width: 300px"
+          />
+          <div>
+            <h4>{{ selectedProduct?.nombre }}</h4>
+            <p class="fw-bold text-success">{{ selectedProduct?.precio | currency:'MXN' }}</p>
+            <p class="text-light">{{ selectedProduct?.descripcion }}</p>
+            <div class="mb-2">
+              <label for="modal-cantidad" class="form-label">Cantidad:</label>
+              <input
+                type="number"
+                class="form-control border-gold bg-dark text-white rounded-3 shadow-sm"
+                [(ngModel)]="cantidad"
+                min="1"
+                style="width: 100px"
+              />
             </div>
-          </div>
-          <div class="modal-footer border-secondary">
-            <button class="btn btn-success">Finalizar compra</button>
-            <button class="btn btn-secondary" data-bs-dismiss="modal">
-              Cerrar
+            <button class="btn btn-custom mt-2" (click)="agregarAlCarrito(); modal.close()">
+              Agregar al carrito
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </ng-template>
+    <!-- Modal del carrito (usando ng-bootstrap) -->
+    <ng-template #cartModal let-modal>
+      <div class="modal-content bg-dark text-white">
+        <div class="modal-header border-secondary">
+          <h5 class="modal-title">Tu carrito</h5>
+          <button type="button" class="btn-close btn-close-white" (click)="modal.dismiss()"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-group mb-3">
+            <li *ngFor="let item of carrito; let i = index" class="list-group-item d-flex justify-content-between align-items-center bg-dark text-white border-secondary">
+              <div class="d-flex align-items-center">
+                <img [src]="item.imagen" alt="{{ item.nombre }}" class="me-3 rounded" style="width: 50px; height: 50px; object-fit: cover;">
+                <div>
+                  <strong>{{ item.nombre }}</strong><br>
+                  <small>{{ item.precio | currency:'MXN' }} x {{ item.cantidad }}</small>
+                </div>
+              </div>
+              <div>
+                <span class="fw-bold">{{ (item.precio * item.cantidad) | currency:'MXN' }}</span>
+                <button class="btn btn-sm btn-danger ms-2" (click)="eliminarDelCarrito(i)">×</button>
+              </div>
+            </li>
+          </ul>
+          <div class="text-end fw-bold">
+            Total: {{ totalCarrito | currency:'MXN' }}
+          </div>
+        </div>
+        <div class="modal-footer border-secondary">
+          <button class="btn btn-success" (click)="finalizarCompra(); modal.close()">Finalizar compra</button>
+          <button class="btn btn-secondary" (click)="modal.dismiss()">Cerrar</button>
+        </div>
+      </div>
+    </ng-template>
 
     <!-- CONTACTO -->
     <section id="contacto" class="section-light">
@@ -325,18 +261,6 @@
       </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- <script src="modal.js"></script> -->
-    <script src="./recursos/js/filtro.js"></script>
+    <router-outlet />
   </body>
 </html>
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-<router-outlet />
