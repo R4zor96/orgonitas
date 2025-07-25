@@ -10,7 +10,7 @@
     <nav class="navbar navbar-expand-lg custom-navbar sticky-top shadow-sm">
       <div class="container">
         <a class="navbar-brand" href="#">
-          Orgonitas Sagradas
+          Mirror
         </a>
         <button
           class="navbar-toggler text-light"
@@ -35,9 +35,9 @@
               <a class="nav-link" href="#contacto">Contacto</a>
             </li>
 
-            <!-- Ícono del carrito -->
+            <!-- Botón carrito -->
             <li class="nav-item">
-              <!-- <a
+              <a
                 class="nav-link position-relative"
                 href="#"
                 (click)="openCartModal(cartModal)"
@@ -47,8 +47,26 @@
                   class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
                   >{{ contadorCarrito }}</span
                 >
-              </a> -->
+              </a>
             </li>
+
+           <li class="nav-item">
+            <a class="nav-link" href="#" (click)="openRegisterModal(registerModal)">Registrarse</a>
+          </li>
+
+
+            <!-- Botón inicio de sesión -->
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="#"
+                (click)="openLoginModal(loginModal)"
+              >
+                Iniciar Sesión
+              </a>
+            </li>
+
+
           </ul>
         </div>
       </div>
@@ -64,29 +82,54 @@
     </section>
 
     <!-- ¿QUÉ ES UNA ORGONITA? -->
-    <section id="que-es" class="section-light">
+
+    <section id="que-es" class="section-light py-5">
       <div class="container">
         <div class="row align-items-center">
+          <!-- Columna: texto -->
           <div class="col-md-6 mb-4 mb-md-0">
-            <img
-              src="./recursos/Que_es.jpg"
-              class="img-fluid rounded"
-              alt="Orgonita explicada"
-            />
-          </div>
-          <div class="col-md-6">
-            <h2>¿Qué es una Orgonita?</h2>
-            <p>
-              Una orgonita es un dispositivo de energía hecho con resina,
-              metales y cristales que armoniza los campos energéticos del
-              entorno. Es usada para mejorar el bienestar, reducir el estrés y
-              elevar la vibración del espacio donde se encuentra.
+            <h2 class="mb-4" style="color: #f1f1f1;">¿Qué es una Orgonita?</h2>
+            <p class="mb-3">
+              Una orgonita es un dispositivo de energía hecho con resina, metales y cristales que armoniza los campos energéticos del entorno.
             </p>
-            <p>Ideal para tu hogar, oficina o como un regalo con intención.</p>
+            <p class="mb-4">
+              Es usada para mejorar el bienestar, reducir el estrés y elevar la vibración del espacio donde se encuentra.
+            </p>
+            <p>
+              Ideal para tu hogar, oficina o como un regalo con intención.
+            </p>
+          </div>
+
+          <!-- Columna: slider de productos -->
+          <div class="col-md-6">
+            <div class="custom-slider-container">
+              <button class="slider-arrow" (click)="prev()">❮</button>
+
+              <div class="product-card custom-product-card" *ngIf="filteredProducts.length > 0">
+                <img
+                  class="product-img"
+                  [src]="filteredProducts[currentIndex].imagen"
+                  [alt]="filteredProducts[currentIndex].nombre"
+                />
+                <div class="product-content">
+                  <h3 class="product-title">{{ filteredProducts[currentIndex].nombre }}</h3>
+                  <p class="product-desc">{{ filteredProducts[currentIndex].descripcion }}</p>
+                  <p class="product-price">${{ filteredProducts[currentIndex].precio }}</p>
+                  <a href="#productos" class="btn btn-custom mt-3">Ver productos</a>
+                </div>
+              </div>
+
+              <div *ngIf="filteredProducts.length === 0">
+                <p style="color: #ccc;">No hay productos que coincidan con los filtros.</p>
+              </div>
+
+              <button class="slider-arrow" (click)="next()">❯</button>
+            </div>
           </div>
         </div>
       </div>
     </section>
+
 
     <!-- PRODUCTOS -->
     <section id="productos" class="section-dark">
@@ -232,6 +275,81 @@
         </div>
       </div>
     </ng-template>
+
+    <!-- Modal Registro -->
+<ng-template #registerModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Registro de Usuario</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <label for="name" class="form-label">Nombre</label>
+        <input type="text" id="name" class="form-control" [(ngModel)]="registerData.name" name="name" required />
+      </div>
+      <div class="mb-3">
+        <label for="ap" class="form-label">Apellido Paterno</label>
+        <input type="text" id="ap" class="form-control" [(ngModel)]="registerData.ap" name="ap" required />
+      </div>
+      <div class="mb-3">
+        <label for="am" class="form-label">Apellido Materno</label>
+        <input type="text" id="am" class="form-control" [(ngModel)]="registerData.am" name="am" required />
+      </div>
+      <div class="mb-3">
+        <label for="celular" class="form-label">Celular</label>
+        <input type="tel" id="celular" class="form-control" [(ngModel)]="registerData.celular" name="celular" required />
+      </div>
+      <div class="mb-3">
+        <label for="idDireccion" class="form-label">ID Dirección</label>
+        <input type="text" id="idDireccion" class="form-control" [(ngModel)]="registerData.idDireccion" name="idDireccion" />
+      </div>
+      <div class="mb-3">
+        <label for="colonia" class="form-label">Colonia</label>
+        <input type="text" id="colonia" class="form-control" [(ngModel)]="registerData.colonia" name="colonia" />
+      </div>
+      <div class="mb-3">
+        <label for="correo" class="form-label">Correo Electrónico</label>
+        <input type="email" id="correo" class="form-control" [(ngModel)]="registerData.correo" name="correo" required />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input type="password" id="password" class="form-control" [(ngModel)]="registerData.password" name="password" required />
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</button>
+    <button type="button" class="btn btn-primary" (click)="register()">Registrar</button>
+  </div>
+</ng-template>
+
+
+    <!-- Modal Inicio de Sesión -->
+    <ng-template #loginModal let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title">Iniciar Sesión</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="login()" #loginForm="ngForm">
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="loginData.correo" required />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="loginData.password" required />
+          </div>
+          <button type="submit" class="btn btn-custom" [disabled]="!loginForm.form.valid">Entrar</button>
+        </form>
+      </div>
+    </ng-template>
+
+
+
+
+
 
     <!-- CONTACTO -->
     <section id="contacto" class="section-light">

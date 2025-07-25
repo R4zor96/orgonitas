@@ -8,8 +8,8 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-root',
   imports: [
     RouterOutlet,
-    CommonModule, // Importa CommonModule para *ngFor y *ngIf
-    FormsModule, // Importa FormsModule para ngModel
+    CommonModule,
+    FormsModule,
   ],
   templateUrl: './app.component.html',
   encapsulation: ViewEncapsulation.None,
@@ -57,29 +57,56 @@ export class AppComponent implements OnInit {
   totalCarrito = 0;
   contadorCarrito = 0;
 
+  // Lógica slider simple
+  currentIndex = 0;
+
+  // Variables para modal de registro
+  registerData = {
+    name: '',
+    ap: '',
+    am: '',
+    celular: '',
+    idDireccion: '',
+    colonia: '',   // <-- agregado colonia
+    correo: '',
+    password: ''
+  };
+
+  // Variables para modal de login
+  loginData = {
+    correo: '',
+    password: ''
+  };
+
   constructor(private modalService: NgbModal) {}
 
   ngOnInit() {
     this.applyFilters();
   }
 
-  // Aplicar filtros y ordenamiento
+  next() {
+    this.currentIndex = (this.currentIndex + 1) % this.filteredProducts.length;
+  }
+
+  prev() {
+    this.currentIndex =
+      (this.currentIndex - 1 + this.filteredProducts.length) %
+      this.filteredProducts.length;
+  }
+
   applyFilters() {
-    // Filtrar por nombre
     let filtered = this.products.filter((product) => {
       return product.nombre
         .toLowerCase()
         .includes(this.filterNombre.toLowerCase());
     });
 
-    // Filtrar por precio
     filtered = filtered.filter((product) => {
       const min = this.filterPrecioMin ?? 0;
       const max = this.filterPrecioMax ?? Number.MAX_VALUE;
       return product.precio >= min && product.precio <= max;
     });
 
-    // Ordenar
     if (this.ordenarPor) {
       filtered.sort((a, b) => {
         switch (this.ordenarPor) {
@@ -98,9 +125,9 @@ export class AppComponent implements OnInit {
     }
 
     this.filteredProducts = filtered;
+    this.currentIndex = 0;
   }
 
-  // Limpiar todos los filtros
   limpiarFiltros() {
     this.filterNombre = '';
     this.filterPrecioMin = null;
@@ -109,7 +136,6 @@ export class AppComponent implements OnInit {
     this.applyFilters();
   }
 
-  // Abrir modal de producto
   openProductModal(content: any, product: any) {
     this.selectedProduct = product;
     this.cantidad = 1;
@@ -119,7 +145,6 @@ export class AppComponent implements OnInit {
     });
   }
 
-  // Agregar producto al carrito
   agregarAlCarrito() {
     if (!this.selectedProduct) return;
 
@@ -140,13 +165,11 @@ export class AppComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  // Eliminar producto del carrito
   eliminarDelCarrito(index: number) {
     this.carrito.splice(index, 1);
     this.actualizarCarrito();
   }
 
-  // Actualizar totales del carrito
   actualizarCarrito() {
     this.totalCarrito = this.carrito.reduce(
       (total, item) => total + item.precio * item.cantidad,
@@ -159,11 +182,81 @@ export class AppComponent implements OnInit {
     );
   }
 
-  // Finalizar compra
   finalizarCompra() {
     alert(`¡Compra finalizada! Total: $${this.totalCarrito} MXN`);
     this.carrito = [];
     this.actualizarCarrito();
+    this.modalService.dismissAll();
+  }
+
+  openCartModal(modal: any) {
+    this.modalService.open(modal, {
+      centered: true,
+      windowClass: 'dark-modal',
+      size: 'lg',
+    });
+  }
+
+  // Modal Registro
+  openRegisterModal(modal: any) {
+    this.modalService.open(modal, {
+      centered: true,
+      windowClass: 'dark-modal',
+      size: 'md',
+    });
+  }
+
+  register() {
+    if (
+      !this.registerData.name ||
+      !this.registerData.ap ||
+      !this.registerData.am ||
+      !this.registerData.celular ||
+      !this.registerData.correo ||
+      !this.registerData.password
+    ) {
+      alert('Por favor, completa todos los campos requeridos.');
+      return;
+    }
+
+    alert(`Usuario ${this.registerData.name} registrado correctamente.`);
+
+    this.registerData = {
+      name: '',
+      ap: '',
+      am: '',
+      celular: '',
+      idDireccion: '',
+      colonia: '',   // <-- reseteamos colonia
+      correo: '',
+      password: ''
+    };
+
+    this.modalService.dismissAll();
+  }
+
+  // Modal Login
+  openLoginModal(modal: any) {
+    this.modalService.open(modal, {
+      centered: true,
+      windowClass: 'dark-modal',
+      size: 'md',
+    });
+  }
+
+  login() {
+    if (!this.loginData.correo || !this.loginData.password) {
+      alert('Por favor, completa todos los campos de inicio de sesión.');
+      return;
+    }
+
+    alert(`Usuario con correo ${this.loginData.correo} inició sesión correctamente.`);
+
+    this.loginData = {
+      correo: '',
+      password: ''
+    };
+
     this.modalService.dismissAll();
   }
 }

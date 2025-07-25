@@ -54,6 +54,7 @@ body {
     padding: 140px 20px;
     position: relative;
     color: white;
+    
   }
 
   .hero-cracked::before {
@@ -202,3 +203,143 @@ body {
   footer a:hover {
     color: #b38c42;
   }
+
+
+  /* --- Estilos Generales --- */
+#que-es {
+  background: linear-gradient(135deg, #1d1f2f, #2e2f3e);
+  color: #f1f1f1;
+  padding: 60px 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Títulos y párrafos */
+#que-es h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #e5c47e;
+  text-shadow: 0 0 10px rgba(229, 196, 126, 0.3);
+}
+
+#que-es p {
+  font-size: 1.1rem;
+  color: #ddd;
+  line-height: 1.7;
+}
+
+/* --- Slider Container --- */
+.custom-slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  /* Quitamos fondo y sombra */
+  background-color: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  position: relative;
+}
+
+
+/* --- Flechas --- */
+.slider-arrow {
+  background-color: #e5c47e;
+  color: #1d1f2f;
+  font-size: 2rem;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.slider-arrow:hover {
+  background-color: #fff1cd;
+  transform: scale(1.1);
+}
+
+/* --- Tarjeta del producto --- */
+.custom-product-card {
+  background-color: #1d1f2f;
+  border-radius: 16px;
+  overflow: hidden;
+  max-width: 280px;
+  box-shadow: 0 0 15px rgba(229, 196, 126, 0.2);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.custom-product-card:hover {
+  transform: scale(1.02);
+}
+
+/* Imagen */
+.product-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 2px solid #e5c47e;
+}
+
+/* Contenido */
+.product-content {
+  padding: 15px;
+}
+
+.product-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #fff9e7;
+}
+
+.product-desc {
+  font-size: 0.95rem;
+  color: #bbb;
+  margin-top: 8px;
+  min-height: 60px;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #e5c47e;
+  margin-top: 10px;
+}
+
+/* --- Botón Personalizado --- */
+.btn-custom {
+  background-color: #e5c47e;
+  color: #1d1f2f;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 600;
+  border-radius: 30px;
+  transition: 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-custom:hover {
+  background-color: #fff1cd;
+  transform: translateY(-2px);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .custom-slider-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .slider-arrow {
+    font-size: 1.5rem;
+    width: 38px;
+    height: 38px;
+  }
+
+  .custom-product-card {
+    max-width: 100%;
+  }
+}
