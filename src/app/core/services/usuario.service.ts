@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 export interface Usuario {
   nombre: string;
-  apellidoPaterno: string;  // Usa camelCase que es lo que espera Nest
+  apellidoPaterno: string; // Usa camelCase que es lo que espera Nest
   apellidoMaterno: string;
   celular: string;
   correo: string;
@@ -23,11 +24,21 @@ export interface Usuario {
   providedIn: 'root',
 })
 export class UsuarioService {
-  private apiUrl = 'http://localhost:3000/usuarios'; // Cambia a tu URL real
+  private apiUrl = 'http://localhost:3000/usuarios';
 
   constructor(private http: HttpClient) {}
 
   crearUsuario(usuario: Usuario): Observable<any> {
-    return this.http.post(this.apiUrl, usuario);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    // Asegurar que el rol siempre esté presente
+    const body = {
+      ...usuario,
+      rol: usuario.rol || 'usuario', // Valor por defecto
+    };
+
+    return this.http.post(this.apiUrl, body, { headers });
   }
 }
