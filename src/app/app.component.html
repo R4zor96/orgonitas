@@ -10,6 +10,7 @@
     <nav class="navbar navbar-expand-lg custom-navbar sticky-top shadow-sm">
       <div class="container">
         <a class="navbar-brand" href="#">
+          <img src="recursos/icono.png" alt="png" width="90" height="70" style="object-fit: cover; border-radius: 70%; margin-right: 8px;">
           Mirror
         </a>
         <button
@@ -34,8 +35,16 @@
             <li class="nav-item">
               <a class="nav-link" href="#contacto">Contacto</a>
             </li>
-
-            <!-- Botón carrito -->
+            <li class="nav-item">
+              <a class="nav-link" href="#" (click)="openRegisterModal(registerModal)">
+                Registrarse
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" (click)="openLoginModal(loginModal)">
+                Iniciar Sesión
+              </a>
+            </li>
             <li class="nav-item">
               <a
                 class="nav-link position-relative"
@@ -45,38 +54,22 @@
                 🛒
                 <span
                   class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                  >{{ contadorCarrito }}</span
                 >
+                  {{ contadorCarrito }}
+                </span>
               </a>
             </li>
-
-           <li class="nav-item">
-            <a class="nav-link" href="#" (click)="openRegisterModal(registerModal)">Registrarse</a>
-          </li>
-
-
-            <!-- Botón inicio de sesión -->
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="#"
-                (click)="openLoginModal(loginModal)"
-              >
-                Iniciar Sesión
-              </a>
-            </li>
-
-
           </ul>
         </div>
       </div>
     </nav>
 
+
     <!-- HERO CON PATRÓN -->
     <section id="inicio" class="hero-cracked d-flex align-items-center">
       <div class="container text-center">
-        <h1 class="display-4 fw-bold">Descubre el poder de las Orgonitas</h1>
-        <p class="lead">Protección, armonía y energía positiva en tu vida</p>
+        <h1 class="display-4 fw-bold">¡UNETE A LA REVOLUCIÓN ENERGÉTICA!</h1>
+        <p class="lead">Protege tu hogar y tu esencia más auténtica</p>
         <a href="#productos" class="btn btn-custom mt-3">Ver productos</a>
       </div>
     </section>
