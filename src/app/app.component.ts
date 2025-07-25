@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { UsuarioService, Usuario } from './core/services/usuario.service';
 import { HttpClientModule } from '@angular/common/http';
 
-
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, CommonModule, FormsModule, HttpClientModule],
@@ -16,23 +15,6 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  usuario: Usuario = {
-    nombre: '',
-    apellidoPaterno: '',
-    apellidoMaterno: '',
-    celular: '',
-    correo: '',
-    password: '',
-    rol: 'usuario', // o 'admin'
-    calle: '',
-    numero: '',
-    colonia: '',
-    cp: '',
-    municipio: '',
-    estado: '',
-    referencias: '',
-  };
-
   // Productos
   products = [
     {
@@ -106,28 +88,28 @@ export class AppComponent implements OnInit {
     private usuarioService: UsuarioService
   ) {}
 
-private limpiarFormulario() {
-  this.registerData = {
-    nombre: '',
-    apellidoPaterno: '',
-    apellidoMaterno: '',
-    celular: '',
-    correo: '',
-    password: '',
-    rol: 'usuario',
-    calle: '',
-    numero: '',
-    colonia: '',
-    cp: '',
-    municipio: '',
-    estado: '',
-    referencias: ''
-  } as Usuario;
-}
+  private limpiarFormulario() {
+    this.registerData = {
+      nombre: '',
+      apellidoPaterno: '',
+      apellidoMaterno: '',
+      celular: '',
+      correo: '',
+      password: '',
+      rol: 'usuario',
+      calle: '',
+      numero: '',
+      colonia: '',
+      cp: '',
+      municipio: '',
+      estado: '',
+      referencias: '',
+    } as Usuario;
+  }
 
-ngOnInit() {
-  this.applyFilters();
-}
+  ngOnInit() {
+    this.applyFilters();
+  }
 
   next() {
     this.currentIndex = (this.currentIndex + 1) % this.filteredProducts.length;
@@ -251,28 +233,40 @@ ngOnInit() {
     });
   }
 
-register() {
-  // Validación básica
-  if (!this.registerData.nombre || !this.registerData.apellidoPaterno ||
-      !this.registerData.celular || !this.registerData.correo ||
-      !this.registerData.password) {
-    alert('Por favor completa los campos obligatorios');
-    return;
-  }
-
-  // Envía los datos al servicio
-  this.usuarioService.crearUsuario(this.registerData).subscribe({
-    next: (res) => {
-      alert('Usuario registrado con éxito');
-      this.limpiarFormulario();
-      this.modalService.dismissAll();
-    },
-    error: (err) => {
-      console.error('Error al registrar:', err);
-      alert(`Error: ${err.error?.message || 'No se pudo completar el registro'}`);
+  register() {
+    // Validación básica
+    if (
+      !this.registerData.nombre ||
+      !this.registerData.apellidoPaterno ||
+      !this.registerData.celular ||
+      !this.registerData.correo ||
+      !this.registerData.password
+    ) {
+      alert('Por favor completa los campos obligatorios');
+      return;
     }
-  });
-}
+
+    this.usuarioService.crearUsuario(this.registerData).subscribe({
+      next: (res) => {
+        alert('Usuario registrado con éxito');
+        this.limpiarFormulario();
+        this.modalService.dismissAll();
+      },
+      error: (err) => {
+        console.error('Error detallado:', err);
+
+        let errorMsg = 'No se pudo completar el registro';
+
+        if (err.status === 0) {
+          errorMsg = 'Error de conexión con el servidor';
+        } else if (err.error?.message) {
+          errorMsg = err.error.message;
+        }
+
+        alert(`Error: ${errorMsg}`);
+      },
+    });
+  }
 
   // Modal Login
   openLoginModal(modal: any) {
