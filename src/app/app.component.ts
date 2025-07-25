@@ -3,19 +3,36 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { UsuarioService, Usuario } from './core/services/usuario.service';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterOutlet,
-    CommonModule,
-    FormsModule,
-  ],
+  imports: [RouterOutlet, CommonModule, FormsModule, HttpClientModule],
   templateUrl: './app.component.html',
+  providers: [UsuarioService],
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  usuario: Usuario = {
+    nombre: '',
+    apellidoPaterno: '',
+    apellidoMaterno: '',
+    celular: '',
+    correo: '',
+    password: '',
+    rol: 'usuario', // o 'admin'
+    calle: '',
+    numero: '',
+    colonia: '',
+    cp: '',
+    municipio: '',
+    estado: '',
+    referencias: '',
+  };
+
   // Productos
   products = [
     {
@@ -61,34 +78,56 @@ export class AppComponent implements OnInit {
   currentIndex = 0;
 
   // Variables para modal de registro
-  registerData = {
-  nombre: '',
-  apellido_paterno: '',
-  apellido_materno: '',
-  celular: '',
-  correo: '',
-  password: '',
-  rol: 'usuario', // Valor por defecto
-  calle: '',
-  numero: '',
-  colonia: '',
-  cp: '',
-  municipio: '',
-  estado: '',
-  referencias: ''
-};
+  registerData: Usuario = {
+    nombre: '',
+    apellidoPaterno: '',
+    apellidoMaterno: '',
+    celular: '',
+    correo: '',
+    password: '',
+    rol: 'usuario', // asigna el valor por defecto que uses
+    calle: '',
+    numero: '',
+    colonia: '',
+    cp: '',
+    municipio: '',
+    estado: '',
+    referencias: '',
+  };
 
   // Variables para modal de login
   loginData = {
     correo: '',
-    password: ''
+    password: '',
   };
 
-  constructor(private modalService: NgbModal) {}
+  constructor(
+    private modalService: NgbModal,
+    private usuarioService: UsuarioService
+  ) {}
 
-  ngOnInit() {
-    this.applyFilters();
-  }
+private limpiarFormulario() {
+  this.registerData = {
+    nombre: '',
+    apellidoPaterno: '',
+    apellidoMaterno: '',
+    celular: '',
+    correo: '',
+    password: '',
+    rol: 'usuario',
+    calle: '',
+    numero: '',
+    colonia: '',
+    cp: '',
+    municipio: '',
+    estado: '',
+    referencias: ''
+  } as Usuario;
+}
+
+ngOnInit() {
+  this.applyFilters();
+}
 
   next() {
     this.currentIndex = (this.currentIndex + 1) % this.filteredProducts.length;
@@ -212,38 +251,27 @@ export class AppComponent implements OnInit {
     });
   }
 
-  register() {
-  const data = this.registerData;
-  if (
-    !data.nombre || !data.apellido_paterno || !data.apellido_materno ||
-    !data.celular || !data.correo || !data.password
-  ) {
-    alert('Por favor, completa los campos obligatorios.');
+register() {
+  // Validación básica
+  if (!this.registerData.nombre || !this.registerData.apellidoPaterno ||
+      !this.registerData.celular || !this.registerData.correo ||
+      !this.registerData.password) {
+    alert('Por favor completa los campos obligatorios');
     return;
   }
 
-  // Aquí podrías enviar los datos a tu backend usando HttpClient
-
-  alert(`Usuario ${data.nombre} registrado correctamente.`);
-
-  this.registerData = {
-    nombre: '',
-    apellido_paterno: '',
-    apellido_materno: '',
-    celular: '',
-    correo: '',
-    password: '',
-    rol: 'usuario',
-    calle: '',
-    numero: '',
-    colonia: '',
-    cp: '',
-    municipio: '',
-    estado: '',
-    referencias: ''
-  };
-
-  this.modalService.dismissAll();
+  // Envía los datos al servicio
+  this.usuarioService.crearUsuario(this.registerData).subscribe({
+    next: (res) => {
+      alert('Usuario registrado con éxito');
+      this.limpiarFormulario();
+      this.modalService.dismissAll();
+    },
+    error: (err) => {
+      console.error('Error al registrar:', err);
+      alert(`Error: ${err.error?.message || 'No se pudo completar el registro'}`);
+    }
+  });
 }
 
   // Modal Login
@@ -261,11 +289,13 @@ export class AppComponent implements OnInit {
       return;
     }
 
-    alert(`Usuario con correo ${this.loginData.correo} inició sesión correctamente.`);
+    alert(
+      `Usuario con correo ${this.loginData.correo} inició sesión correctamente.`
+    );
 
     this.loginData = {
       correo: '',
-      password: ''
+      password: '',
     };
 
     this.modalService.dismissAll();

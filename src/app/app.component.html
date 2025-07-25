@@ -276,40 +276,38 @@
       </div>
     </ng-template>
 
-    <!-- Modal Registro -->
-    <ng-template #registerModal let-modal>
-      <div class="modal-header">
-        <h5 class="modal-title">Registro</h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Datos Personales -->
-        <input type="text" class="form-control mb-2" placeholder="Nombre" [(ngModel)]="registerData.nombre">
-        <input type="text" class="form-control mb-2" placeholder="Apellido Paterno" [(ngModel)]="registerData.apellido_paterno">
-        <input type="text" class="form-control mb-2" placeholder="Apellido Materno" [(ngModel)]="registerData.apellido_materno">
-        <input type="text" class="form-control mb-2" placeholder="Celular" [(ngModel)]="registerData.celular">
-        <input type="email" class="form-control mb-2" placeholder="Correo" [(ngModel)]="registerData.correo">
-        <input type="password" class="form-control mb-2" placeholder="Contraseña" [(ngModel)]="registerData.password">
+<!-- Modal Registro -->
+<ng-template #registerModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Registro</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <!-- Datos Personales -->
+    <input type="text" class="form-control mb-2" placeholder="Nombre" [(ngModel)]="registerData.nombre" name="nombre" />
+    <input type="text" class="form-control mb-2" placeholder="Apellido Paterno" [(ngModel)]="registerData.apellidoPaterno" name="apellidoPaterno" />
+    <input type="text" class="form-control mb-2" placeholder="Apellido Materno" [(ngModel)]="registerData.apellidoMaterno" name="apellidoMaterno" />
+    <input type="text" class="form-control mb-2" placeholder="Celular" [(ngModel)]="registerData.celular" name="celular" />
+    <input type="email" class="form-control mb-2" placeholder="Correo" [(ngModel)]="registerData.correo" name="correo" />
+    <input type="password" class="form-control mb-2" placeholder="Contraseña" [(ngModel)]="registerData.password" name="password" />
 
-        <!-- Dirección -->
-        <input type="text" class="form-control mb-2" placeholder="Calle" [(ngModel)]="registerData.calle">
-        <input type="text" class="form-control mb-2" placeholder="Número" [(ngModel)]="registerData.numero">
-        <input type="text" class="form-control mb-2" placeholder="Colonia" [(ngModel)]="registerData.colonia">
-        <input type="text" class="form-control mb-2" placeholder="Código Postal" [(ngModel)]="registerData.cp">
-        <input type="text" class="form-control mb-2" placeholder="Municipio" [(ngModel)]="registerData.municipio">
-        <input type="text" class="form-control mb-2" placeholder="Estado" [(ngModel)]="registerData.estado">
-        <textarea class="form-control mb-2" placeholder="Referencias" rows="2" [(ngModel)]="registerData.referencias"></textarea>
+    <!-- Dirección -->
+    <input type="text" class="form-control mb-2" placeholder="Calle" [(ngModel)]="registerData.calle" name="calle" />
+    <input type="text" class="form-control mb-2" placeholder="Número" [(ngModel)]="registerData.numero" name="numero" />
+    <input type="text" class="form-control mb-2" placeholder="Colonia" [(ngModel)]="registerData.colonia" name="colonia" />
+    <input type="text" class="form-control mb-2" placeholder="Código Postal" [(ngModel)]="registerData.cp" name="cp" />
+    <input type="text" class="form-control mb-2" placeholder="Municipio" [(ngModel)]="registerData.municipio" name="municipio" />
+    <input type="text" class="form-control mb-2" placeholder="Estado" [(ngModel)]="registerData.estado" name="estado" />
+    <textarea class="form-control mb-2" placeholder="Referencias" rows="2" [(ngModel)]="registerData.referencias" name="referencias"></textarea>
 
-        <!-- Rol (oculto o visible si lo deseas) -->
-        <input type="hidden" [(ngModel)]="registerData.rol">
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</button>
-        <button class="btn btn-primary" (click)="register()">Registrarse</button>
-      </div>
-    </ng-template>
-
-
+    <!-- Rol (oculto) -->
+    <input type="hidden" [ngModel]="registerData.rol" name="rol">
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</button>
+    <button class="btn btn-primary" (click)="register()">Registrarse</button>
+  </div>
+</ng-template>
 
     <!-- Modal Inicio de Sesión -->
     <ng-template #loginModal let-modal>
@@ -331,11 +329,6 @@
         </form>
       </div>
     </ng-template>
-
-
-
-
-
 
     <!-- CONTACTO -->
     <section id="contacto" class="section-light">

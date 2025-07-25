@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 export interface Usuario {
   nombre: string;
-  apellidoPaterno: string;
+  apellidoPaterno: string;  // Usa camelCase que es lo que espera Nest
   apellidoMaterno: string;
   celular: string;
   correo: string;
