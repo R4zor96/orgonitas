@@ -362,3 +362,35 @@ footer a:hover {
     font-size: 1.3rem;
   }
 }
+
+/* ---------- MENÚ COLAPSADO EN MÓVIL ---------- */
+@media (max-width: 991.98px) {
+  /* Fondo y padding para el contenedor colapsado */
+  .navbar-collapse {
+    background-color: #0e0b13; /* mismo fondo que body */
+    padding: 15px 20px;
+    border-top: 2px solid #b38c42;
+  }
+
+  /* Nav vertical para que las opciones se muestren una debajo de otra */
+  .navbar-nav {
+    flex-direction: column !important;
+  }
+
+  /* Links más visibles, con espacio para tocar */
+  .nav-link {
+    padding: 12px 10px;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #694921;
+    color: #b38c42 !important; /* dorado */
+  }
+
+  /* Efecto hover para que destaque */
+  .nav-link:hover {
+    background-color: #694921;
+    color: #fff !important;
+  }
+}
+
+
+
