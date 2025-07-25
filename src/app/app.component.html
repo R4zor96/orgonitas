@@ -277,52 +277,38 @@
     </ng-template>
 
     <!-- Modal Registro -->
-<ng-template #registerModal let-modal>
-  <div class="modal-header">
-    <h5 class="modal-title">Registro de Usuario</h5>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
-  </div>
-  <div class="modal-body">
-    <form>
-      <div class="mb-3">
-        <label for="name" class="form-label">Nombre</label>
-        <input type="text" id="name" class="form-control" [(ngModel)]="registerData.name" name="name" required />
+    <ng-template #registerModal let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title">Registro</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
       </div>
-      <div class="mb-3">
-        <label for="ap" class="form-label">Apellido Paterno</label>
-        <input type="text" id="ap" class="form-control" [(ngModel)]="registerData.ap" name="ap" required />
+      <div class="modal-body">
+        <!-- Datos Personales -->
+        <input type="text" class="form-control mb-2" placeholder="Nombre" [(ngModel)]="registerData.nombre">
+        <input type="text" class="form-control mb-2" placeholder="Apellido Paterno" [(ngModel)]="registerData.apellido_paterno">
+        <input type="text" class="form-control mb-2" placeholder="Apellido Materno" [(ngModel)]="registerData.apellido_materno">
+        <input type="text" class="form-control mb-2" placeholder="Celular" [(ngModel)]="registerData.celular">
+        <input type="email" class="form-control mb-2" placeholder="Correo" [(ngModel)]="registerData.correo">
+        <input type="password" class="form-control mb-2" placeholder="Contraseña" [(ngModel)]="registerData.password">
+
+        <!-- Dirección -->
+        <input type="text" class="form-control mb-2" placeholder="Calle" [(ngModel)]="registerData.calle">
+        <input type="text" class="form-control mb-2" placeholder="Número" [(ngModel)]="registerData.numero">
+        <input type="text" class="form-control mb-2" placeholder="Colonia" [(ngModel)]="registerData.colonia">
+        <input type="text" class="form-control mb-2" placeholder="Código Postal" [(ngModel)]="registerData.cp">
+        <input type="text" class="form-control mb-2" placeholder="Municipio" [(ngModel)]="registerData.municipio">
+        <input type="text" class="form-control mb-2" placeholder="Estado" [(ngModel)]="registerData.estado">
+        <textarea class="form-control mb-2" placeholder="Referencias" rows="2" [(ngModel)]="registerData.referencias"></textarea>
+
+        <!-- Rol (oculto o visible si lo deseas) -->
+        <input type="hidden" [(ngModel)]="registerData.rol">
       </div>
-      <div class="mb-3">
-        <label for="am" class="form-label">Apellido Materno</label>
-        <input type="text" id="am" class="form-control" [(ngModel)]="registerData.am" name="am" required />
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</button>
+        <button class="btn btn-primary" (click)="register()">Registrarse</button>
       </div>
-      <div class="mb-3">
-        <label for="celular" class="form-label">Celular</label>
-        <input type="tel" id="celular" class="form-control" [(ngModel)]="registerData.celular" name="celular" required />
-      </div>
-      <div class="mb-3">
-        <label for="idDireccion" class="form-label">ID Dirección</label>
-        <input type="text" id="idDireccion" class="form-control" [(ngModel)]="registerData.idDireccion" name="idDireccion" />
-      </div>
-      <div class="mb-3">
-        <label for="colonia" class="form-label">Colonia</label>
-        <input type="text" id="colonia" class="form-control" [(ngModel)]="registerData.colonia" name="colonia" />
-      </div>
-      <div class="mb-3">
-        <label for="correo" class="form-label">Correo Electrónico</label>
-        <input type="email" id="correo" class="form-control" [(ngModel)]="registerData.correo" name="correo" required />
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Contraseña</label>
-        <input type="password" id="password" class="form-control" [(ngModel)]="registerData.password" name="password" required />
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</button>
-    <button type="button" class="btn btn-primary" (click)="register()">Registrar</button>
-  </div>
-</ng-template>
+    </ng-template>
+
 
 
     <!-- Modal Inicio de Sesión -->

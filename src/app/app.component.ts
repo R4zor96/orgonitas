@@ -62,15 +62,21 @@ export class AppComponent implements OnInit {
 
   // Variables para modal de registro
   registerData = {
-    name: '',
-    ap: '',
-    am: '',
-    celular: '',
-    idDireccion: '',
-    colonia: '',   // <-- agregado colonia
-    correo: '',
-    password: ''
-  };
+  nombre: '',
+  apellido_paterno: '',
+  apellido_materno: '',
+  celular: '',
+  correo: '',
+  password: '',
+  rol: 'usuario', // Valor por defecto
+  calle: '',
+  numero: '',
+  colonia: '',
+  cp: '',
+  municipio: '',
+  estado: '',
+  referencias: ''
+};
 
   // Variables para modal de login
   loginData = {
@@ -207,33 +213,38 @@ export class AppComponent implements OnInit {
   }
 
   register() {
-    if (
-      !this.registerData.name ||
-      !this.registerData.ap ||
-      !this.registerData.am ||
-      !this.registerData.celular ||
-      !this.registerData.correo ||
-      !this.registerData.password
-    ) {
-      alert('Por favor, completa todos los campos requeridos.');
-      return;
-    }
-
-    alert(`Usuario ${this.registerData.name} registrado correctamente.`);
-
-    this.registerData = {
-      name: '',
-      ap: '',
-      am: '',
-      celular: '',
-      idDireccion: '',
-      colonia: '',   // <-- reseteamos colonia
-      correo: '',
-      password: ''
-    };
-
-    this.modalService.dismissAll();
+  const data = this.registerData;
+  if (
+    !data.nombre || !data.apellido_paterno || !data.apellido_materno ||
+    !data.celular || !data.correo || !data.password
+  ) {
+    alert('Por favor, completa los campos obligatorios.');
+    return;
   }
+
+  // Aquí podrías enviar los datos a tu backend usando HttpClient
+
+  alert(`Usuario ${data.nombre} registrado correctamente.`);
+
+  this.registerData = {
+    nombre: '',
+    apellido_paterno: '',
+    apellido_materno: '',
+    celular: '',
+    correo: '',
+    password: '',
+    rol: 'usuario',
+    calle: '',
+    numero: '',
+    colonia: '',
+    cp: '',
+    municipio: '',
+    estado: '',
+    referencias: ''
+  };
+
+  this.modalService.dismissAll();
+}
 
   // Modal Login
   openLoginModal(modal: any) {
