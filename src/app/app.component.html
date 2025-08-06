@@ -72,7 +72,7 @@
     <!-- HERO CON PATRÓN -->
     <section id="inicio" class="hero-cracked d-flex align-items-center">
       <div class="container text-center">
-        <h1 class="display-4 fw-bold">¡UNETE A LA REVOLUCIÓN ENERGÉTICA!</h1>
+        <h1 class="display-4 fw-bold">¡Tecnología Energética para un Mundo en Armonía!</h1>
         <p class="lead">Protege tu hogar y tu esencia más auténtica</p>
         <a href="#productos" class="btn btn-custom mt-3">Ver productos</a>
       </div>
@@ -87,13 +87,11 @@
           <div class="col-md-6 mb-4 mb-md-0">
             <h2 class="mb-4" style="color: #f1f1f1;">¿Qué es una Orgonita?</h2>
             <p class="mb-3">
-              Una orgonita es un dispositivo de energía hecho con resina, metales y cristales que armoniza los campos energéticos del entorno.
-            </p>
+              Una orgonita es una herramienta de armonización energética, creada con una fusión cuidadosa de resina de alta calidad, metales conductores (como virutas de hierro o cobre) y cristales de cuarzo.            </p>
             <p class="mb-4">
-              Es usada para mejorar el bienestar, reducir el estrés y elevar la vibración del espacio donde se encuentra.
-            </p>
+              Su diseño no es solo estético: cada pieza es un equilibrio entre ciencia y espiritualidad.
             <p>
-              Ideal para tu hogar, oficina o como un regalo con intención.
+              En Mirror, todas nuestras orgonitas vienen previamente activadas con una bobina Tesla, utilizando energía fría para potenciar su capacidad de limpieza y sintonización desde el primer momento.
             </p>
           </div>
 
@@ -111,7 +109,7 @@
                 <div class="product-content">
                   <h3 class="product-title">{{ filteredProducts[currentIndex].nombre }}</h3>
                   <p class="product-desc">{{ filteredProducts[currentIndex].descripcion }}</p>
-                  <p class="product-price">${{ filteredProducts[currentIndex].precio }}</p>
+                  <p class="product-price">${{ filteredProducts[currentIndex].precio | currency:'USD ' }}</p>
                   <a href="#productos" class="btn btn-custom mt-3">Ver productos</a>
                 </div>
               </div>
@@ -126,6 +124,117 @@
         </div>
       </div>
     </section>
+
+    <!-- ¿Preguntas frecuentes? -->
+     <section class="faq-section container py-5" id="faq">
+      <h2 class="fw-bold mb-4">Las Preguntas Más Frecuentes.</h2>
+      <p class="mb-5">
+        En Mirror, queremos que tu experiencia sea clara, sencilla y llena de confianza. Aquí respondemos las preguntas más comunes sobre nuestras orgonitas, envíos, cuidados y mucho más. Si no encuentras lo que buscas, no dudes en contactarnos.
+      </p>
+
+      <div class="accordion" id="accordionFAQ">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq1">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+              ¿Para que Sirve una Orgonita?
+            </button>
+          </h2>
+          <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="faq1" data-bs-parent="#accordionFAQ">
+            <div class="accordion-body">
+              
+              <p class="mb-4">
+              Las orgonitas son compañeras ideales para:
+              <p>
+
+              <p class="mb-4">
+              Transformar espacios: Limpian energías densas o estancadas (llamadas "energía DOR") en hogares, oficinas o lugares de meditación.
+              <p>
+
+               <p class="mb-4">
+              Protección electromagnética: Neutralizan campos electromagnéticos (EMF) de dispositivos electrónicos, como routers, teléfonos o computadoras.
+              <p>
+                
+                <p class="mb-4">
+              Amplificar intenciones: Potencian prácticas espirituales, meditación o rituales gracias a la conexión con los cristales.
+              <p>
+
+                <p class="mb-4">
+              Equilibrio emocional: Ayudan a calmar la mente, reducir el estrés y reconectar con tu energía esencial.
+              <p>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq2">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+              ¿Cómo funcionan las Orgonitas?
+            </button>
+          </h2>
+          <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#accordionFAQ">
+            <div class="accordion-body">
+
+              <p class="mb-4">
+              El secreto está en la piezoelectricidad del cuarzo:
+              <p>
+
+              <p class="mb-4">
+              Al comprimir el cristal de cuarzo dentro de la resina, sus electrones se alinean, generando una carga eléctrica suave.
+              <p>
+
+              <p class="mb-4">
+              Esta carga crea un campo electromagnético toroidal (en forma de donut) que actúa como un "filtro energético".
+              <p>
+
+              <p class="mb-4">
+              El campo atrae la energía DOR (desorganizada o dañina) y la transforma en energía limpia y equilibrada, mientras absorbe y armoniza los EMF del entorno.              
+              <p>
+              
+              <p class="mb-4">
+              Gracias a la activación con bobina Tesla, este proceso se intensifica, asegurando que tu orgonita llegue a ti lista para actuar con máxima eficacia.
+              <p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq3">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+              ¿Cómo funcionan las Orgonitas?
+            </button>
+          </h2>
+          <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#accordionFAQ">
+            <div class="accordion-body">
+              
+              <p class="mb-4">
+              ¡Depende de lo que busques! Si sientes que:
+              <p>
+
+              <p class="mb-4">
+              Tu espacio está cargado o te cuesta relajarte en casa.
+              <p>
+
+              <p class="mb-4">
+              Pasas horas frente a dispositivos electrónicos y notas fatiga o estrés.
+              <p>
+
+              <p class="mb-4">
+              Deseas potenciar tu conexión espiritual o crear un ambiente propicio para la meditación...
+              <p>
+
+              <p class="mb-4">
+              Una orgonita puede ser tu aliada perfecta. No es un producto "mágico", sino una herramienta basada en principios científicos y ancestrales para apoyar tu bienestar de manera holística.
+              <p>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Agrega más items como desees -->
+      </div>
+    </section>
+
 
 
     <!-- PRODUCTOS -->
@@ -194,7 +303,7 @@
                 [alt]="product.nombre"
               />
               <h5>{{ product.nombre }}</h5>
-              <p>{{ product.precio | currency:'MXN' }}</p>
+              <p>{{ product.precio | currency:'USD ' }}</p>
               <button class="btn btn-custom" (click)="openProductModal(productModal, product)">
                 Comprar
               </button>
@@ -220,7 +329,7 @@
           />
           <div>
             <h4>{{ selectedProduct?.nombre }}</h4>
-            <p class="fw-bold text-success">{{ selectedProduct?.precio | currency:'MXN' }}</p>
+            <p class="fw-bold text-success">{{ selectedProduct?.precio | currency:'USD ' }}</p>
             <p class="text-light">{{ selectedProduct?.descripcion }}</p>
             <div class="mb-2">
               <label for="modal-cantidad" class="form-label">Cantidad:</label>
@@ -253,17 +362,17 @@
                 <img [src]="item.imagen" alt="{{ item.nombre }}" class="me-3 rounded" style="width: 50px; height: 50px; object-fit: cover;">
                 <div>
                   <strong>{{ item.nombre }}</strong><br>
-                  <small>{{ item.precio | currency:'MXN' }} x {{ item.cantidad }}</small>
+                  <small>{{ item.precio | currency:'USD ' }} x {{ item.cantidad }}</small>
                 </div>
               </div>
               <div>
-                <span class="fw-bold">{{ (item.precio * item.cantidad) | currency:'MXN' }}</span>
+                <span class="fw-bold">{{ (item.precio * item.cantidad) | currency:'USD ' }}</span>
                 <button class="btn btn-sm btn-danger ms-2" (click)="eliminarDelCarrito(i)">×</button>
               </div>
             </li>
           </ul>
           <div class="text-end fw-bold">
-            Total: {{ totalCarrito | currency:'MXN' }}
+            Total: {{ totalCarrito | currency:'USD ' }}
           </div>
         </div>
         <div class="modal-footer border-secondary">
@@ -275,52 +384,90 @@
 
     <!-- Modal Registro -->
     <ng-template #registerModal let-modal>
-      <div class="modal-header">
-        <h5 class="modal-title">Registro</h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
-      </div>
-      <div class="modal-body">
+      <div class="modal-content custom-register-modal">
+        <div class="modal-header">
+          <h5 class="modal-title">Registro</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+        </div>
+        <div class="modal-body custom-register-modal">
         <!-- Datos Personales -->
-        <input type="text" class="form-control mb-2" placeholder="Nombre" [(ngModel)]="registerData.nombre" name="nombre" />
-        <input type="text" class="form-control mb-2" placeholder="Apellido Paterno" [(ngModel)]="registerData.apellidoPaterno" name="apellidoPaterno" />
-        <input type="text" class="form-control mb-2" placeholder="Apellido Materno" [(ngModel)]="registerData.apellidoMaterno" name="apellidoMaterno" />
-        <input type="text" class="form-control mb-2" placeholder="Celular" [(ngModel)]="registerData.celular" name="celular" />
-        <input type="email" class="form-control mb-2" placeholder="Correo" [(ngModel)]="registerData.correo" name="correo" />
-        <input type="password" class="form-control mb-2" placeholder="Contraseña" [(ngModel)]="registerData.password" name="password" />
+        <h5 class="section-title">Datos Personales</h5>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="registerData.nombre" name="nombre" />
+          </div>
+          <div class="col-md-6 mb-3">
+            <input type="text" class="form-control" placeholder="Apellido Paterno" [(ngModel)]="registerData.apellidoPaterno" name="apellidoPaterno" />
+          </div>
+          <div class="col-md-6 mb-3">
+            <input type="text" class="form-control" placeholder="Apellido Materno" [(ngModel)]="registerData.apellidoMaterno" name="apellidoMaterno" />
+          </div>
+          <div class="col-md-6 mb-3">
+            <input type="text" class="form-control" placeholder="Celular" [(ngModel)]="registerData.celular" name="celular" />
+          </div>
+          <div class="col-md-6 mb-3">
+            <input type="email" class="form-control" placeholder="Correo" [(ngModel)]="registerData.correo" name="correo" />
+          </div>
+          <div class="col-md-6 mb-3">
+            <input type="password" class="form-control" placeholder="Contraseña" [(ngModel)]="registerData.password" name="password" />
+          </div>
+        </div>
 
         <!-- Dirección -->
-        <input type="text" class="form-control mb-2" placeholder="Calle" [(ngModel)]="registerData.calle" name="calle" />
-        <input type="text" class="form-control mb-2" placeholder="Número" [(ngModel)]="registerData.numero" name="numero" />
-        <input type="text" class="form-control mb-2" placeholder="Colonia" [(ngModel)]="registerData.colonia" name="colonia" />
-        <input type="text" class="form-control mb-2" placeholder="Código Postal" [(ngModel)]="registerData.cp" name="cp" />
-        <input type="text" class="form-control mb-2" placeholder="Municipio" [(ngModel)]="registerData.municipio" name="municipio" />
-        <input type="text" class="form-control mb-2" placeholder="Estado" [(ngModel)]="registerData.estado" name="estado" />
-        <textarea class="form-control mb-2" placeholder="Referencias" rows="2" [(ngModel)]="registerData.referencias" name="referencias"></textarea>
+        <h5 class="section-title">Dirección</h5>
+        <div class="row">
+          <div class="col-md-8 mb-3">
+            <input type="text" class="form-control" placeholder="Calle" [(ngModel)]="registerData.calle" name="calle" />
+          </div>
+          <div class="col-md-4 mb-3">
+            <input type="text" class="form-control" placeholder="Número" [(ngModel)]="registerData.numero" name="numero" />
+          </div>
+          <div class="col-md-6 mb-3">
+            <input type="text" class="form-control" placeholder="Colonia" [(ngModel)]="registerData.colonia" name="colonia" />
+          </div>
+          <div class="col-md-6 mb-3">
+            <input type="text" class="form-control" placeholder="Código Postal" [(ngModel)]="registerData.cp" name="cp" />
+          </div>
+          <div class="col-md-6 mb-3">
+            <input type="text" class="form-control" placeholder="Municipio" [(ngModel)]="registerData.municipio" name="municipio" />
+          </div>
+          <div class="col-md-6 mb-3">
+            <input type="text" class="form-control" placeholder="Estado" [(ngModel)]="registerData.estado" name="estado" />
+          </div>
+          <div class="col-12 mb-3">
+            <textarea class="form-control" placeholder="Referencias" rows="2" [(ngModel)]="registerData.referencias" name="referencias"></textarea>
+          </div>
+        </div>
 
-        <!-- Rol (oculto) -->
-        <input type="hidden" [(ngModel)]="registerData.rol" name="rol">
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</button>
-        <button class="btn btn-primary" (click)="register()">Registrarse</button>
+          <!-- Rol oculto -->
+          <input type="hidden" [(ngModel)]="registerData.rol" name="rol" />
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</button>
+          <button class="btn btn-primary" (click)="register()">Registrarse</button>
+        </div>
       </div>
     </ng-template>
 
     <!-- Modal Inicio de Sesión -->
     <ng-template #loginModal let-modal>
-      <div class="modal-header">
-        <h5 class="modal-title">Iniciar Sesión</h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+      <div class="modal-content custom-register-modal">
+        <div class="modal-header">
+          <h5 class="modal-title">Iniciar Sesión</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+        </div>
       </div>
-      <div class="modal-body">
+      <div class="modal-body custom-register-modal">
         <form (ngSubmit)="login()" #loginForm="ngForm">
+          
           <div class="mb-3">
-            <label for="email" class="form-label">Correo electrónico</label>
-            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="loginData.correo" required />
+            <h5 for="email" class="section-title">Correo electrónico</h5>
+            <input type="email" placeholder="Correo electrónico" class="form-control" id="email" name="email" [(ngModel)]="loginData.correo" required />
           </div>
           <div class="mb-3">
-            <label for="password" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="loginData.password" required />
+            <h5 for="password" class="section-title">Contraseña</h5>
+            <input type="password" placeholder="Contraseña" class="form-control" id="password" name="password" [(ngModel)]="loginData.password" required />
           </div>
           <button type="submit" class="btn btn-custom" [disabled]="!loginForm.form.valid">Entrar</button>
         </form>
@@ -333,13 +480,16 @@
         <h2>Contáctanos</h2>
         <p>
           ¿Tienes dudas o deseas un diseño personalizado? Escríbenos vía
-          WhatsApp o Instagram.
+          WhatsApp, Instagram o Tiktok.
         </p>
-        <a href="https://wa.me/521XXXXXXXXXX" class="btn btn-custom me-2"
+        <a href="https://chat.whatsapp.com/EAUdsJ22q87LldJ3LvMYVZ" class="btn btn-custom me-2"
           >WhatsApp</a
         >
-        <a href="https://instagram.com/tu_cuenta" class="btn btn-custom"
+        <a href="https://www.instagram.com/mirroor369?igsh=MTd1a3VoeWxuajN4cA==" class="btn btn-custom me-2"
           >Instagram</a
+        >
+        <a href="https://www.tiktok.com/@elyanyshow?_t=ZS-8ye7CpA3qIy&_r=1" class="btn btn-custom"
+          >Tiktok</a
         >
       </div>
     </section>
@@ -347,7 +497,10 @@
     <!-- FOOTER -->
     <footer>
       <div class="container text-center">
-        <p>&copy; 2025 Orgonitas Sagradas · Diseñado con intención y amor</p>
+        <p>&copy; 2025 Mirror · Diseñado con intención y amor</p>
+
+        <p>Diseñados para resonar con personas que ya están en sintonía con temas espirituales, energéticos y de bienestar holístico.</p>
+
         <p>
           <a href="#inicio">Inicio</a> · <a href="#productos">Productos</a> ·
           <a href="#contacto">Contacto</a>
