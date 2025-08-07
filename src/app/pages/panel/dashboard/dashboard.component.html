@@ -1,1 +1,47 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+  <h1>Panel de Administración</h1>
+
+  <!-- Sección de KPIs -->
+  <div class="kpi-container">
+    <div class="kpi-card">
+      <h3>Total de Ventas</h3>
+      <div class="kpi-value">{{ totalVentas }}</div>
+      <div class="kpi-description">Pedidos realizados</div>
+    </div>
+
+    <div class="kpi-card">
+      <h3>Ingresos Totales</h3>
+      <div class="kpi-value">${{ formatNumber(ingresosTotales) }}</div> <!-- Cambio aquí -->
+      <div class="kpi-description">Ingresos acumulados</div>
+    </div>
+
+    <div class="kpi-card">
+      <h3>Clientes Activos</h3>
+      <div class="kpi-value">{{ clientesActivos }}</div>
+      <div class="kpi-description">Usuarios registrados</div>
+    </div>
+
+    <div class="kpi-card">
+      <h3>Producto Más Vendido</h3>
+      <div class="kpi-value">{{ productoMasVendido }}</div>
+      <div class="kpi-description">Favorito de los clientes</div>
+    </div>
+  </div>
+
+  <!-- Sección de Gráficos -->
+  <div class="charts-container">
+    <div class="chart-card">
+      <h3>Ventas por Mes</h3>
+      <div class="chart-wrapper">
+        <canvas #barChart></canvas>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h3>Distribución de Ventas por Producto</h3>
+      <div class="chart-wrapper">
+        <canvas #pieChart></canvas>
+      </div>
+    </div>
+  </div>
+</div>

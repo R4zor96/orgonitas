@@ -4,8 +4,9 @@ import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 
 export interface Usuario {
+  id_usuario?: number;
   nombre: string;
-  apellidoPaterno: string; // Usa camelCase que es lo que espera Nest
+  apellidoPaterno: string;
   apellidoMaterno: string;
   celular: string;
   correo: string;
@@ -28,17 +29,26 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) {}
 
-  crearUsuario(usuario: Usuario): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-
-    // Asegurar que el rol siempre esté presente
-    const body = {
+  crearUsuario(usuario: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(this.apiUrl, {
       ...usuario,
-      rol: usuario.rol || 'usuario', // Valor por defecto
-    };
+      rol: usuario.rol || 'usuario'
+    });
+  }
 
-    return this.http.post(this.apiUrl, body, { headers });
+  getUsuarios(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(this.apiUrl);
+  }
+
+  getUsuario(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.apiUrl}/${id}`);
+  }
+
+  updateUsuario(id: number, usuario: Usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.apiUrl}/${id}`, usuario);
+  }
+
+  deleteUsuario(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
