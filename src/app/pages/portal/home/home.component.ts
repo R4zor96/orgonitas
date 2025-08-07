@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UsuarioService, Usuario } from '../../../core/services/usuario.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ViewChild, ElementRef } from '@angular/core';
+
 
 @Component({
   selector: 'app-home',
@@ -53,6 +55,7 @@ export class HomeComponent implements OnInit {
   carrito: any[] = [];
   totalCarrito = 0;
   contadorCarrito = 0;
+  @ViewChild('formspreeForm') formspreeForm!: ElementRef<HTMLFormElement>;
 
   // Lógica slider simple
   currentIndex = 0;
@@ -208,11 +211,15 @@ export class HomeComponent implements OnInit {
   }
 
   finalizarCompra() {
-    alert(`¡Compra finalizada! Total: $${this.totalCarrito} MXN`);
-    this.carrito = [];
-    this.actualizarCarrito();
-    this.modalService.dismissAll();
+  if (this.formspreeForm) {
+    this.formspreeForm.nativeElement.submit();
   }
+  alert('¡Compra finalizada!');
+  this.carrito = [];
+  this.actualizarCarrito();
+  }
+
+
 
   openCartModal(modal: any) {
     this.modalService.open(modal, {

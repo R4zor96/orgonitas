@@ -374,6 +374,24 @@
           <div class="text-end fw-bold">
             Total: {{ totalCarrito | currency:'USD ' }}
           </div>
+
+        <form
+          #formspreeForm
+          action="https://formspree.io/f/xrblobjv"
+          method="POST"
+          style="display: none;"
+        >
+          <input type="hidden" name="total" [value]="'USD $' + totalCarrito.toFixed(2)" />
+          <ng-container *ngFor="let item of carrito; let i = index">
+            <input
+              type="hidden"
+              name="producto{{ i }}"
+              [value]="'Producto: ' + item.nombre + ' x' + item.cantidad + ' = USD $' + (item.precio * item.cantidad).toFixed(2)"
+            />
+          </ng-container>
+        </form>
+
+
         </div>
         <div class="modal-footer border-secondary">
           <button class="btn btn-success" (click)="finalizarCompra(); modal.close()">Finalizar compra</button>
@@ -497,7 +515,7 @@
     <!-- FOOTER -->
     <footer>
       <div class="container text-center">
-        <p>&copy; 2025 Mirror · Diseñado con intención y amor</p>
+        <p>&copy; 2025 Mirror · Diseñado con intención y amor.</p>
 
         <p>Diseñados para resonar con personas que ya están en sintonía con temas espirituales, energéticos y de bienestar holístico.</p>
 
