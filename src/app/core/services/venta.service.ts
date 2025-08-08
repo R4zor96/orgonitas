@@ -16,7 +16,7 @@ export interface Venta {
   providedIn: 'root',
 })
 export class VentaService {
-  private apiUrl = 'backend-orgonitas.up.railway.app/ventas';
+  private apiUrl = 'https://backend-orgonitas.up.railway.app/ventas';
 
   constructor(private http: HttpClient) {}
 

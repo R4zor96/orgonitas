@@ -14,7 +14,7 @@ export interface Producto {
   providedIn: 'root',
 })
 export class ProductoService {
-  private apiUrl = 'backend-orgonitas.up.railway.app/productos';
+  private apiUrl = 'https://backend-orgonitas.up.railway.app/productos';
 
   constructor(private http: HttpClient) {}
 

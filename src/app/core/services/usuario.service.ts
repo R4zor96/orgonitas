@@ -25,7 +25,7 @@ export interface Usuario {
   providedIn: 'root',
 })
 export class UsuarioService {
-  private apiUrl = 'backend-orgonitas.up.railway.app/usuarios'; // Asegúrate de que esta URL sea correcta
+  private apiUrl = 'https://backend-orgonitas.up.railway.app/usuarios'; // Asegúrate de que esta URL sea correcta
 
   constructor(private http: HttpClient) {}
 
