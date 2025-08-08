@@ -2,17 +2,19 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UsuarioService, Usuario } from '../../../core/services/usuario.service';
+import {
+  UsuarioService,
+  Usuario,
+} from '../../../core/services/usuario.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ViewChild, ElementRef } from '@angular/core';
-
 
 @Component({
   selector: 'app-home',
   imports: [CommonModule, FormsModule, HttpClientModule],
   providers: [UsuarioService],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   // Productos
@@ -211,15 +213,13 @@ export class HomeComponent implements OnInit {
   }
 
   finalizarCompra() {
-  if (this.formspreeForm) {
-    this.formspreeForm.nativeElement.submit();
+    if (this.formspreeForm) {
+      this.formspreeForm.nativeElement.submit();
+    }
+    alert('¡Compra finalizada!');
+    this.carrito = [];
+    this.actualizarCarrito();
   }
-  alert('¡Compra finalizada!');
-  this.carrito = [];
-  this.actualizarCarrito();
-  }
-
-
 
   openCartModal(modal: any) {
     this.modalService.open(modal, {
@@ -288,15 +288,25 @@ export class HomeComponent implements OnInit {
       return;
     }
 
-    alert(
-      `Usuario con correo ${this.loginData.correo} inició sesión correctamente.`
-    );
+    this.usuarioService
+      .login(this.loginData.correo, this.loginData.password)
+      .subscribe({
+        next: (usuario) => {
+          // Guardar usuario en localStorage para mantener la sesión
+          localStorage.setItem('usuario', JSON.stringify(usuario));
 
-    this.loginData = {
-      correo: '',
-      password: '',
-    };
-
-    this.modalService.dismissAll();
+          alert(`Bienvenido ${usuario.nombre}`);
+          this.loginData = { correo: '', password: '' };
+          this.modalService.dismissAll();
+        },
+        error: (err) => {
+          console.error('Error de login:', err);
+          let errorMsg = 'No se pudo iniciar sesión';
+          if (err.status === 401) {
+            errorMsg = 'Correo o contraseña incorrectos';
+          }
+          alert(errorMsg);
+        },
+      });
   }
 }

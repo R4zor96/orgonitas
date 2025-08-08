@@ -32,7 +32,7 @@ export class UsuarioService {
   crearUsuario(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(this.apiUrl, {
       ...usuario,
-      rol: usuario.rol || 'usuario'
+      rol: usuario.rol || 'usuario',
     });
   }
 
@@ -50,5 +50,12 @@ export class UsuarioService {
 
   deleteUsuario(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  login(correo: string, password: string): Observable<Usuario> {
+    return this.http.post<Usuario>(`${this.apiUrl}/login`, {
+      correo,
+      password,
+    });
   }
 }
